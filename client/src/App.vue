@@ -1,5 +1,5 @@
 <template>
-  <div id="cart-app">
+  <div id="character-generator-app">
     <header></header>
     <nav>
         <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">
