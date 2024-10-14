@@ -5,7 +5,10 @@
 <script>
 import GenerateCharacter from '../components/GenerateCharacter.vue';
 export default {
-  components: {GenerateCharacter},
+  components: { GenerateCharacter },
+  created() {
+    
+  }
 }
 </script>
 

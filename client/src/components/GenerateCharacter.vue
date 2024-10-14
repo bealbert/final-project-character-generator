@@ -7,6 +7,8 @@
       <font-awesome-icon id="role" icon="fa-solid fa-hat-wizard" />
     </div>
     <ul class="traits">
+      <li v-for="character in characters" :key="character.id">
+      {{ character.name }}</li>
       <li id="name-txt">Name:</li>
       <li id="appearance-txt">Appearance:</li>
       <li id="defining-trait-txt">Defining Trait:</li>
