@@ -6,6 +6,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import SavedCharacterView from '../views/SavedCharacterView.vue'
 
 
 /**
@@ -17,39 +18,48 @@ import RegisterView from '../views/RegisterView.vue'
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-      // meta: {
-      //   requiresAuth: true
-      // }
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: LoginView,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
-      path: "/logout",
-      name: "logout",
-      component: LogoutView,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: RegisterView,
-      meta: {
-        requiresAuth: false
-      }
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+    // meta: {
+    //   requiresAuth: true
+    // }
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
+    meta: {
+      requiresAuth: false
     }
-  ];
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: LogoutView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: RegisterView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  //todo: add userId to path
+  {
+    path: '/saved',
+    name: 'saved',
+    component: SavedCharacterView,
+    meta: {
+      requiresAuth: false
+    }
+  }
+];
 
 // Create the router
 const router = createRouter({
@@ -67,7 +77,7 @@ router.beforeEach((to) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    return {name: "login"};
+    return { name: "login" };
   }
   // Otherwise, do nothing and they'll go to their next destination
 });
