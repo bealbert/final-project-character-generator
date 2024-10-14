@@ -56,7 +56,7 @@ const routes = [
     name: 'saved',
     component: SavedCharacterView,
     meta: {
-      requiresAuth: false
+      requiresAuth: true
     }
   }
 ];
