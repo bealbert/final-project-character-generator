@@ -31,14 +31,8 @@ import axios from "axios";
 //     definingTrait: 'Defining Trait: The holy symbol always around their neck.',
 //     role: 'Role: Wizard',
 //   },
-  
-//   {
-//     id: 5,
-//     name: 'Name: Namic Kingsley',
-//     appearance: 'Appearance: Pale gold hair and watery blue eyes.',
-//     definingTrait: 'Defining Trait: Long and thin, like a spider.',
-//     role: 'Role: Necromancer',
-//   },
+
+// 
 // ];
 
 const resourceService = {
@@ -46,9 +40,9 @@ const resourceService = {
     return axios.get('/characters')
   },
 
-  // generateCharacter() {
-  //   return axios.post('/characters');
-  // }
+  generateCharacter() {
+    return axios.post('/characters');
+  },
 
   getNames() {
     return axios.get('/traits/names');

@@ -56,9 +56,9 @@ const routes = [
     path: '/saved',
     name: 'saved',
     component: SavedCharacterView,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
+      meta: {
+        requiresAuth: true
+      }
   },
   {
     path: '/traits',

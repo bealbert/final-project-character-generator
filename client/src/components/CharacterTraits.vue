@@ -1,16 +1,17 @@
 <template>
   <section>
-    <table>
-      <tr>
-        <th>Names</th>
-        <th>Appearances</th>
-        <th>Defining Traits</th>
-        <th>Adventurer Roles</th>
-      </tr>
-      <tr>
-        <td v-if="name in names" :key="name.id">{{ name }}</td>
-      </tr>
-    </table>
+    <ul>
+      <li v-for="name in names" :key="name.id">{{ name }}</li>
+    </ul>
+    <ul>
+      <li v-for="appearance in appearances" :key="appearance.id">{{ appearance }}</li>
+    </ul>
+    <ul>
+      <li v-for="definingTrait in definingTraits" :key="definingTrait.id">{{ definingTrait }}</li>
+    </ul>
+    <ul>
+      <li v-for="adventurerRole in adventurerRoles" :key="adventurerRole.id">{{ adventurerRole }}</li>
+    </ul>
   </section>
 </template>
 

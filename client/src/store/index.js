@@ -4,7 +4,7 @@ import axios from 'axios';
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
-      savedCharacters: [],
+      characters: [],
         names: [],
         appearances: [],
         definingTraits: [],
@@ -13,11 +13,6 @@ export function createStore(currentToken, currentUser) {
       user: currentUser || {},
     },
     mutations: {
-      SET_SAVED_CHARACTERS(state, characters) {
-        // state.savedCharacters = characters.filter((character) => {
-        //   return character.userId = userId;
-        // })
-      },
       SET_CHARACTERS(state, characters) {
         state.characters = characters;
       },

@@ -15,13 +15,9 @@
 
 <script>
 export default {
-  computed: {
-    // savedCharacters() {
-    //   return this.$store.state.characters.filter((character) => {
-    //     return character.userId == this.$route.params.userId;
-    //   })
-    //}
-  }
+  props: [
+    'savedCharacters'
+  ],
 }
 </script>
 

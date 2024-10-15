@@ -7,19 +7,40 @@
       <font-awesome-icon id="role" icon="fa-solid fa-hat-wizard" />
     </div>
     <ul class="traits">
-      <li id="name-txt">Name:</li>
-      <li id="appearance-txt">Appearance:</li>
-      <li id="defining-trait-txt">Defining Trait:</li>
-      <li id="role-txt">Role:</li>
+      <li id="name-txt">Name: {{ character.name }}</li>
+      <li id="appearance-txt">Appearance: {{ character.appearance }}</li>
+      <li id="defining-trait-txt">Defining Trait: {{ character.definingTrait }}</li>
+      <li id="role-txt">Role: {{ character.adventurerRole }}</li>
     </ul>
   </section>
-  <button id="btn">Generate New Character</button>
+  <button @click="generate" id="btn">Generate New Character</button>
 </template>
 <!-- todo: add v-for to .traits -->
+<!-- button needs to change to "save character" when char is generated -->
+<!-- icons need text boxes added on click, create submit form -->
 
 <script>
-export default {
+import { resourceService } from '../services/ResourceService';
 
+export default {
+  data() {
+    return {
+      character: {
+        id: 0,
+        name: '',
+        appearance: '',
+        definingTrait: '',
+        adventurerRole: '',
+      },
+    }
+  },
+  methods: {
+    generate() {
+      resourceService.generateCharacter().then((response) => {
+        this.character = response.data;
+      })
+    }
+  }
 }
 </script>
 
@@ -47,7 +68,7 @@ div.icons {
   padding-top: 41px;
   padding-left: 10px;
   padding-bottom: 41px;
-} 
+}
 
 #appearance {
   margin-top: 10px;
@@ -56,7 +77,7 @@ div.icons {
   padding-top: 40px;
   padding-left: 10px;
   padding-bottom: 41px;
-} 
+}
 
 #defining-trait {
   margin-top: 10px;
@@ -65,7 +86,7 @@ div.icons {
   padding-top: 40px;
   padding-left: 10px;
   padding-bottom: 41px;
-} 
+}
 
 #role {
   margin-top: 10px;
@@ -74,7 +95,7 @@ div.icons {
   padding-top: 30px;
   padding-left: 10px;
   padding-bottom: 45px;
-} 
+}
 
 .traits {
   display: grid;
