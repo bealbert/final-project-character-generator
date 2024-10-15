@@ -5,19 +5,33 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       savedCharacters: [],
-      traits: {
         names: [],
         appearances: [],
         definingTraits: [],
-        roles: []
-      },
+        adventurerRoles: [],
       token: currentToken || '',
       user: currentUser || {},
     },
     mutations: {
       SET_SAVED_CHARACTERS(state, characters) {
-        state.savedCharacters = characters;
-        //filter characters by userId?
+        // state.savedCharacters = characters.filter((character) => {
+        //   return character.userId = userId;
+        // })
+      },
+      SET_CHARACTERS(state, characters) {
+        state.characters = characters;
+      },
+      SET_NAMES(state, names) {
+        state.names = names;
+      },
+      SET_APPEARANCES(state, appearances) {
+        state.appearances = appearances;
+      },
+      SET_DEFINING_TRAITS(state, definingTraits) {
+        state.definingTraits = definingTraits;
+      },
+      SET_ADVENTURER_ROLES(state, adventurerRoles) {
+        state.adventurerRoles = adventurerRoles;
       },
       SET_AUTH_TOKEN(state, token) {
         state.token = token;
