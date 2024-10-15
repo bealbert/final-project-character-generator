@@ -7,6 +7,7 @@ import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import SavedCharacterView from '../views/SavedCharacterView.vue'
+import CharacterTraitsView from '../views/CharacterTraitsView.vue'
 
 
 /**
@@ -58,6 +59,12 @@ const routes = [
     //   meta: {
     //     requiresAuth: true
     //   }
+  },
+  {
+    path: '/traits',
+    name: 'traits',
+    component: CharacterTraitsView,
+    //meta: {requiresAuth: true}
   }
 ];
 

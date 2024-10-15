@@ -1,7 +1,15 @@
 <template>
   <section>
     <table>
-      
+      <tr>
+        <th>Names</th>
+        <th>Appearances</th>
+        <th>Defining Traits</th>
+        <th>Adventurer Roles</th>
+      </tr>
+      <tr>
+        <td v-if="name in names" :key="name.id">{{ name }}</td>
+      </tr>
     </table>
   </section>
 </template>

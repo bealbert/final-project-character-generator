@@ -7,8 +7,11 @@
         <router-link v-bind:to="{ name: 'home' }">
           <button>Home</button>
         </router-link>
-        <router-link v-bind:to="{ name: 'home' }">
+        <router-link v-bind:to="{ name: 'saved' }">
           <button>Saved</button>
+        </router-link>
+        <router-link v-bind:to="{ name: 'traits' }">
+          <button>Traits</button>
         </router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token">
           <button>Logout</button>
@@ -86,6 +89,7 @@ footer {
   align-self: flex-start;
   background-color: #F15025;
   font-weight: bold;
+  /* try to stretch footer so orange runs across the bottom view */
 }
 
 @media only screen and (max-width: 425px) {
