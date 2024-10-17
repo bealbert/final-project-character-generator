@@ -30,6 +30,7 @@ export default {
     };
   },
   methods: {
+    
     editCharacter(selectedCharacter) {
       resourceService.editCharacter(this.selectedCharacter.characterId, this.selectedCharacter).then((response) => {
         this.$router.push({ name: 'saved' });
