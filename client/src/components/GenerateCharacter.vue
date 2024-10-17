@@ -15,7 +15,6 @@
   </section>
   <button @click="generate" id="btn">Generate New Character</button>
 </template>
-<!-- todo: add v-for to .traits -->
 <!-- button needs to change to "save character" when char is generated -->
 <!-- icons need text boxes added on click, create submit form -->
 

@@ -23,9 +23,9 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    // meta: {
-    //   requiresAuth: true
-    // }
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: "/login",
@@ -51,20 +51,20 @@ const routes = [
       requiresAuth: false
     }
   },
-  //todo: add userId to path
+
   {
     path: '/saved',
     name: 'saved',
     component: SavedCharacterView,
-      meta: {
-        requiresAuth: true
-      }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/traits',
     name: 'traits',
     component: CharacterTraitsView,
-    //meta: {requiresAuth: true}
+    meta: { requiresAuth: true }
   }
 ];
 

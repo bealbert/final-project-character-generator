@@ -50,9 +50,13 @@ export default {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+body {
+  background-color: #E6E8E6;
+}
+
 header {
   grid-area: header;
-  width: 98%;
+  width: 99%;
   background-color: #F15025;
   border-radius: 4px;
   display: flex;
@@ -101,10 +105,12 @@ footer {
   grid-area: footer;
   justify-self: center;
   margin: 10px;
-  align-self: flex-start;
   background-color: #F15025;
   font-weight: bold;
-  /* try to stretch footer so orange runs across the bottom view */
+  border-radius: 5px;
+  align-self: flex-start;
+  text-align: center;
+  width: 100%;
 }
 
 @media only screen and (max-width: 425px) {
@@ -126,4 +132,5 @@ footer {
   footer {
     align-self: flex-start;
   }
-}</style>
+}
+</style>
