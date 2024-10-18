@@ -1,7 +1,18 @@
 <template>
-  <section>
-    <div class="icons">
-      <font-awesome-icon id="edit" icon="fa-solid fa-pen-to-square" />
+  <section class="saved-characters">
+    <form v-show="showForm" id="edit-character-form">
+      <label>Name: </label>
+      <input type="text" v-model="selectedCharacter.name">
+      <label>Appearance: </label>
+      <input type="text" v-model="selectedCharacter.appearance">
+      <label>Defining Trait: </label>
+      <input type="text" v-model="selectedCharacter.definingTrait">
+      <label>Adventurer Role: </label>
+      <input type="text" v-model="selectedCharacter.adventurerRole">
+      <input type="submit">
+    </form>
+    <div class="edit-icons">
+      <font-awesome-icon id="edit" icon="fa-solid fa-pen-to-square" @click="showForm = !showForm"/>
       <br>
       <font-awesome-icon id="delete" icon="fa-solid fa-trash-can" />
     </div>
@@ -9,6 +20,15 @@
       <li v-for="character in savedCharacters" :key="character.id">
         <input type="checkbox">
         {{ character.name }}
+        <ul id="saved-appearance">
+          <li>{{ character.appearance }}</li>
+        </ul>
+        <ul id="saved-defining-trait">
+          <li>{{ character.definingTrait }}</li>
+        </ul>
+        <ul id="saved-adventurer-role">
+          <li>{{ character.adventurerRole }}</li>
+        </ul>
       </li>
     </ul>
   </section>
@@ -27,10 +47,11 @@ export default {
         definingTrait: '',
         adventurerRole: '',
       },
+      showForm: false,
     };
   },
   methods: {
-    
+
     editCharacter(selectedCharacter) {
       resourceService.editCharacter(this.selectedCharacter.characterId, this.selectedCharacter).then((response) => {
         this.$router.push({ name: 'saved' });
@@ -46,7 +67,7 @@ export default {
 </script>
 
 <style>
-section {
+section.saved-characters {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-variant: small-caps;
   display: flex;
@@ -61,7 +82,7 @@ section {
   justify-content: flex-start;
 }
 
-div.icons {
+div.edit-icons {
   align-self: center;
   display: flex;
 }
