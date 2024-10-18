@@ -1,24 +1,32 @@
 <template>
   <section class="saved-characters">
-    <form v-show="showForm" id="edit-character-form">
+    <form v-show="showForm" id="edit-character-form" @submit.prevent.stop="editCharacter(selectedCharacter)">
       <label>Name: </label>
-      <input type="text" v-model="selectedCharacter.name">
+      <select name="edit-names" v-model="selectedCharacter.name">
+        <option v-for="name in names" :key="name.id">{{ name }}</option>
+      </select>
       <label>Appearance: </label>
-      <input type="text" v-model="selectedCharacter.appearance">
+      <select name="edit-appearances" v-model="selectedCharacter.appearance">
+        <option v-for="appearance in appearances" :key="appearance.id">{{ appearance }}</option>
+      </select>
       <label>Defining Trait: </label>
-      <input type="text" v-model="selectedCharacter.definingTrait">
+      <select name="edit-defining-traits" v-model="selectedCharacter.definingTrait">
+        <option v-for="definingTrait in definingTraits" :key="definingTrait.id">{{ definingTrait }}</option>
+      </select>
       <label>Adventurer Role: </label>
-      <input type="text" v-model="selectedCharacter.adventurerRole">
+      <select name="edit-adventurer-role" v-model="selectedCharacter.adventurerRole">
+        <option v-for="adventurerRole in adventurerRoles" :key="adventurerRole.id">{{ adventurerRole }}</option>
+      </select>
       <input type="submit">
     </form>
     <div class="edit-icons">
-      <font-awesome-icon id="edit" icon="fa-solid fa-pen-to-square" @click="showForm = !showForm"/>
+      <font-awesome-icon id="edit" icon="fa-solid fa-pen-to-square" @click="showForm = !showForm" />
       <br>
       <font-awesome-icon id="delete" icon="fa-solid fa-trash-can" />
     </div>
     <ul id="saved">
       <li v-for="character in savedCharacters" :key="character.id">
-        <input type="checkbox">
+        <input type="checkbox" @change="addToSelectedCharacter(character, $event)">
         {{ character.name }}
         <ul id="saved-appearance">
           <li>{{ character.appearance }}</li>
@@ -46,15 +54,30 @@ export default {
         appearance: '',
         definingTrait: '',
         adventurerRole: '',
+        userId: 0,
+        nameId: 0,
+        appearanceId: 0,
+        definingTraitId: 0,
+        adventurerRoleId: 0
       },
       showForm: false,
     };
   },
   methods: {
-
+    addToSelectedCharacter(character, event) {
+      if (event.target.checked) {
+        this.selectedCharacter = character;
+      }
+    },
     editCharacter(selectedCharacter) {
+    //im in hell
+    //trait IDS must be updated before we call to edit the character
+    
       resourceService.editCharacter(this.selectedCharacter.characterId, this.selectedCharacter).then((response) => {
-        this.$router.push({ name: 'saved' });
+        resourceService.getCharacters().then((response) => {
+          this.$store.commit('SET_CHARACTERS', response.data);
+          this.showForm = !this.showForm;
+        })
       }).catch((error) => {
         console.log(error);
       });
@@ -63,10 +86,30 @@ export default {
   props: [
     'savedCharacters'
   ],
+  computed: {
+    names() {
+      return this.$store.state.names;
+    },
+    appearances() {
+      return this.$store.state.appearances;
+    },
+    definingTraits() {
+      return this.$store.state.definingTraits;
+    },
+    adventurerRoles() {
+      return this.$store.state.adventurerRoles;
+    }
+  }
 }
 </script>
 
 <style>
+form#edit-character-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 section.saved-characters {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-variant: small-caps;

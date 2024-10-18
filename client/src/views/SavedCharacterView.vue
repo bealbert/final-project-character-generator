@@ -13,13 +13,24 @@ export default {
     }
   },
   created() {
-    resourceService.getCharacters().then((response) => {
-      this.$store.commit('SET_CHARACTERS', response.data);
+    Promise.all([
+      resourceService.getNames(),
+      resourceService.getAppearances(),
+      resourceService.getDefiningTraits(),
+      resourceService.getAdventurerRoles(),
+      resourceService.getCharacters()
+    ]).then(([nameResponse, appearanceResponse, definingTraitResponse, adventurerRoleResponse, charactersResponse]) => {
+      this.$store.commit('SET_NAMES', nameResponse.data);
+      this.$store.commit('SET_APPEARANCES', appearanceResponse.data);
+      this.$store.commit('SET_DEFINING_TRAITS', definingTraitResponse.data);
+      this.$store.commit('SET_ADVENTURER_ROLES', adventurerRoleResponse.data);
+      this.$store.commit('SET_CHARACTERS', charactersResponse.data);
       this.savedCharacters = this.$store.state.characters.filter((character) => {
         return character.userId == this.$store.state.user.id;
-      });
-      console.log(this.savedCharacters);
-    })
+      })
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }
 </script>

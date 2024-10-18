@@ -1,7 +1,4 @@
 <template>
-    <!-- <div v-if="isLoading">
-        <loading-spinner id="spinner" :spin="true" />
-    </div> -->
     <div id="main-div">
         <character-traits />
     </div>
