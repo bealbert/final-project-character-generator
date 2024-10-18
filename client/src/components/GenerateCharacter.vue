@@ -13,7 +13,7 @@
       <li id="role-txt">Role: {{ character.adventurerRole }}</li>
     </ul>
   </section>
-  <button @click="generate" id="btn">Generate New Character</button>
+  <button @click="generate" id="generate-btn">Generate New Character</button>
 </template>
 <!-- button needs to change to "save character" when char is generated -->
 <!-- icons need text boxes added on click, create submit form -->
@@ -114,7 +114,7 @@ div.icons {
   padding: 40px 40px 40px 5px;
 }
 
-#btn {
+#generate-btn {
   align-self: center;
   margin: 10px;
   margin-top: 50px;
@@ -129,7 +129,7 @@ div.icons {
   color: white;
 }
 
-#btn:hover {
+#generate-btn:hover {
   color: black;
 }
 </style>

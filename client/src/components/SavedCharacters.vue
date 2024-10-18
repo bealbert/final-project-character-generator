@@ -3,30 +3,35 @@
     <form v-show="showForm" id="edit-character-form" @submit.prevent.stop="editCharacter(selectedCharacter)">
       <label>Name: </label>
       <select name="edit-names" v-model="selectedCharacter.name">
-        <option v-for="name in names" :key="name.id">{{ name }}</option>
+        <option v-for="name in names" :key="name.traitId">{{ name.traitDescription }}</option>
       </select>
       <label>Appearance: </label>
       <select name="edit-appearances" v-model="selectedCharacter.appearance">
-        <option v-for="appearance in appearances" :key="appearance.id">{{ appearance }}</option>
+        <option v-for="appearance in appearances" :key="appearance.traitId">{{ appearance.traitDescription }}</option>
       </select>
       <label>Defining Trait: </label>
       <select name="edit-defining-traits" v-model="selectedCharacter.definingTrait">
-        <option v-for="definingTrait in definingTraits" :key="definingTrait.id">{{ definingTrait }}</option>
+        <option v-for="definingTrait in definingTraits" :key="definingTrait.traitId">{{ definingTrait.traitDescription }}
+        </option>
       </select>
       <label>Adventurer Role: </label>
       <select name="edit-adventurer-role" v-model="selectedCharacter.adventurerRole">
-        <option v-for="adventurerRole in adventurerRoles" :key="adventurerRole.id">{{ adventurerRole }}</option>
+        <option v-for="adventurerRole in adventurerRoles" :key="adventurerRole.traitId">
+          {{ adventurerRole.traitDescription }}
+        </option>
       </select>
       <input type="submit">
     </form>
     <div class="edit-icons">
       <font-awesome-icon id="edit" icon="fa-solid fa-pen-to-square" @click="showForm = !showForm" />
       <br>
-      <font-awesome-icon id="delete" icon="fa-solid fa-trash-can" />
+      <font-awesome-icon id="delete" icon="fa-solid fa-trash-can"
+        @click="deleteSelectedCharacters(deleteCharactersList)" />
     </div>
     <ul id="saved">
       <li v-for="character in savedCharacters" :key="character.id">
-        <input type="checkbox" @change="addToSelectedCharacter(character, $event)">
+        <input type="checkbox" @change="addToSelectedCharacter(character, $event)" v-bind:value="character.characterId"
+          v-bind:id="character.characterId" v-model="deleteCharactersList" />
         {{ character.name }}
         <ul id="saved-appearance">
           <li>{{ character.appearance }}</li>
@@ -60,6 +65,7 @@ export default {
         definingTraitId: 0,
         adventurerRoleId: 0
       },
+      deleteCharactersList: [],
       showForm: false,
     };
   },
@@ -70,16 +76,34 @@ export default {
       }
     },
     editCharacter(selectedCharacter) {
-    //im in hell
-    //trait IDS must be updated before we call to edit the character
-    
+      this.selectedCharacter.nameId = this.names.find((name) => {
+        return name.traitDescription == selectedCharacter.name;
+      }).traitId;
+      this.selectedCharacter.appearanceId = this.appearances.find((appearance) => {
+        return appearance.traitDescription == selectedCharacter.appearance;
+      }).traitId;
+      this.selectedCharacter.definingTraitId = this.definingTraits.find((definingTrait) => {
+        return definingTrait.traitDescription == selectedCharacter.definingTrait;
+      }).traitId;
+      this.selectedCharacter.adventurerRoleId = this.adventurerRoles.find((adventurerRole) => {
+        return adventurerRole.traitDescription == selectedCharacter.adventurerRole;
+      }).traitId;
       resourceService.editCharacter(this.selectedCharacter.characterId, this.selectedCharacter).then((response) => {
         resourceService.getCharacters().then((response) => {
           this.$store.commit('SET_CHARACTERS', response.data);
+          selectedCharacter = {};
           this.showForm = !this.showForm;
         })
       }).catch((error) => {
         console.log(error);
+      });
+    },
+    deleteSelectedCharacters(deleteCharactersList) {
+      deleteCharactersList.forEach(characterId => {
+        resourceService.deleteCharacter(characterId).then((response => {
+          this.$store.commit('SET_CHARACTERS', response.data);
+          deleteCharactersList = [];
+        }));
       });
     }
   },

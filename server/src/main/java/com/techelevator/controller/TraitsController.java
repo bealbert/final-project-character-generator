@@ -21,29 +21,54 @@ public class TraitsController {
         this.traitDao = traitDao;
     }
 
+//    @GetMapping(path = "/names")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<String> getAllNames() {
+//        return traitDao.getAllNames();
+//    }
+
     @GetMapping(path = "/names")
     @ResponseStatus(HttpStatus.OK)
-    public List<String> getAllNames() {
-        return traitDao.getAllNames();
+    public List<Trait> getAllNameObj() {
+        return traitDao.getAllNameObj();
     }
+
+//    @GetMapping(path = "/appearances")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<String> getAllAppearances() {
+//        return traitDao.getAllAppearances();
+//    }
 
     @GetMapping(path = "/appearances")
     @ResponseStatus(HttpStatus.OK)
-    public List<String> getAllAppearances() {
-        return traitDao.getAllAppearances();
+    public List<Trait> getAllAppearanceObj() {
+        return traitDao.getAllAppearanceObj();
     }
+
+//    @GetMapping(path = "/defining_traits")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<String> getAllDefiningTraits() {
+//        return traitDao.getAllDefiningTraits();
+//    }
 
     @GetMapping(path = "/defining_traits")
     @ResponseStatus(HttpStatus.OK)
-    public List<String> getAllDefiningTraits() {
-        return traitDao.getAllDefiningTraits();
+    public List<Trait> getAllDefiningTraitObj() {
+        return traitDao.getAllDefiningTraitObj();
     }
+
+//    @GetMapping(path = "/adventurer_roles")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<String> getAllAdventurerRoles() {
+//        return traitDao.getAllAdventurerRoles();
+//    }
 
     @GetMapping(path = "/adventurer_roles")
     @ResponseStatus(HttpStatus.OK)
-    public List<String> getAllAdventurerRoles() {
-        return traitDao.getAllAdventurerRoles();
+    public List<Trait> getAllAdventurerRoleObj() {
+        return traitDao.getAllAdventurerRoleObj();
     }
+
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/names")
@@ -54,6 +79,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Oops! You must be logged in to perform this action.");
         }
     }
+
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/appearances")
@@ -64,6 +90,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Oops! You must be logged in to perform this action.");
         }
     }
+
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/defining_traits")
@@ -74,6 +101,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Oops! You must be logged in to perform this action.");
         }
     }
+
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/adventurer_roles")
@@ -84,6 +112,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Oops! You must be logged in to perform this action.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/names/{id}")
@@ -95,6 +124,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to update this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/appearances/{id}")
@@ -106,6 +136,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to update this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/defining_traits/{id}")
@@ -117,6 +148,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to update this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(path = "/adventurer_roles/{id}")
@@ -128,6 +160,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to update this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/names/{id}")
@@ -138,6 +171,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to delete this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/appearances/{id}")
@@ -148,6 +182,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to delete this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/defining_traits/{id}")
@@ -158,6 +193,7 @@ public class TraitsController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to delete this trait.");
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/adventurer_roles/{id}")

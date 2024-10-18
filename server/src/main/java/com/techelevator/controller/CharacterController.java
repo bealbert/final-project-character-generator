@@ -66,14 +66,14 @@ public class CharacterController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCharacterById(@PathVariable int id) {
         try {
             characterDao.deleteCharacterById(id);
         } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You must be an Admin to delete characters.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You must be logged in to delete characters.");
         }
     }
 

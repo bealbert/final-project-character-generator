@@ -5,10 +5,22 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       characters: [],
-        names: [],
-        appearances: [],
-        definingTraits: [],
-        adventurerRoles: [],
+        names: {
+          traitId: 0,
+          traitDescription: ''
+        },
+        appearances: {
+          traitId: 0,
+          traitDescription: ''
+        },
+        definingTraits: {
+          traitId: 0,
+          traitDescription: ''
+        },
+        adventurerRoles: {
+          traitId: 0,
+          traitDescription: ''
+        },
       token: currentToken || '',
       user: currentUser || {},
     },

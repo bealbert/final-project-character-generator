@@ -68,6 +68,46 @@ public class JdbcTraitDao implements TraitDao {
     }
 
     @Override
+    public List<Trait> getAllNameObj() {
+        String sql = "SELECT * FROM character_names ORDER BY name_id";
+        try {
+            return template.query(sql, nameMapper);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Trait> getAllAppearanceObj() {
+        String sql = "SELECT * FROM appearances ORDER BY appearance_id";
+        try {
+            return template.query(sql, appearanceMapper);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Trait> getAllDefiningTraitObj() {
+        String sql = "SELECT * FROM defining_traits ORDER BY defining_trait_id";
+        try {
+            return template.query(sql, definingTraitMapper);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Trait> getAllAdventurerRoleObj() {
+        String sql = "SELECT * FROM adventurer_roles ORDER BY adventurer_role_id";
+        try {
+            return template.query(sql, adventurerRoleMapper);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public List<Integer> getAllNameIds() {
         String sql = "SELECT name_id FROM character_names ORDER BY name_id";
         SqlRowSet rowSet = template.queryForRowSet(sql);

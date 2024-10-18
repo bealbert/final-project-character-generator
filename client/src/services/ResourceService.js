@@ -12,12 +12,15 @@ const resourceService = {
   getNames() {
     return axios.get('/traits/names');
   },
+  
   getAppearances() {
     return axios.get('/traits/appearances');
   },
+
   getDefiningTraits() {
     return axios.get('/traits/defining_traits');
   },
+
   getAdventurerRoles() {
     return axios.get('/traits/adventurer_roles');
   },
