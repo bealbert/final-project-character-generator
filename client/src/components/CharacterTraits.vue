@@ -55,6 +55,8 @@
 import { resourceService } from '../services/ResourceService';
 
 export default {
+  //admin method needed to allow for delete testing
+  //figure out why your 
   data() {
     return {
       selectedNames: [],
@@ -121,6 +123,7 @@ export default {
           this.$store.commit('SET_ADVENTURER_ROLES', adventurerRoleResponse.data);
         });
       }
+      newTrait = {};
       this.showForm = !this.showForm;
     }
   },
