@@ -12,7 +12,7 @@ const resourceService = {
   getNames() {
     return axios.get('/traits/names');
   },
-  
+
   getAppearances() {
     return axios.get('/traits/appearances');
   },
@@ -41,24 +41,24 @@ const resourceService = {
     return axios.post('/traits/adventurer_roles', adventurerRole);
   },
 
-  updateName(nameId, name) {
-    return axios.put(`/traits/names/${nameId}`, name);
-  },
-
-  updateAppearance(appearanceId, appearance) {
-    return axios.put(`/traits/appearances/${appearanceId}`, appearance);
-  },
-
-  updateDefiningTrait(definingTraitId, definingTrait) {
-    return axios.put(`/traits/defining_traits/${definingTraitId}`, definingTrait);
-  },
-
-  updateAdventurerRole(adventurerRoleId, adventurerRole) {
-    return axios.put(`/traits/adventurer_roles/${adventurerRoleId}`, adventurerRole);
-  },
-
   editCharacter(characterId, character) {
     return axios.put(`/characters/${characterId}`, character);
+  },
+
+  deleteName(nameId) {
+    return axios.delete(`/traits/names/${nameId}`);
+  },
+
+  deleteAppearance(appearanceId) {
+    return axios.delete(`/traits/appearances/${appearanceId}`);
+  },
+
+  deleteDefiningTrait(definingTraitId) {
+    return axios.delete(`/traits/defining_traits/${definingTraitId}`);
+  },
+
+  deleteAdventurerRole(adventurerRoleId) {
+    return axios.delete(`/traits/adventurer_roles/${adventurerRoleId}`);
   },
 
   deleteCharacter(characterId) {
