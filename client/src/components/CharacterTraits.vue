@@ -181,12 +181,33 @@ ul {
   border-radius: 5px;
   color: white;
   margin: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px
+}
+
+#name-traits {
+}
+
+#appearance-traits>h1 {
+}
+
+#appearance-traits {
+}
+
+#defining-traits {
 }
 
 .traits-list {
   display: flex;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-variant: small-caps;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  padding-right: 15%;
+  font-size: large;
 }
 
 .trait-buttons {
