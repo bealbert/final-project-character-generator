@@ -121,12 +121,13 @@ footer {
   }
 
   header {
-    height: 12%;
+    height: 6%;
     font-size: small;
   }
 
   img {
     top: 70px;
+    scale: 100%;
   }
 
   footer {

@@ -181,4 +181,8 @@ div.edit-icons {
   color: white;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 425px) {
+  
+}
 </style>

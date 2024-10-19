@@ -185,18 +185,6 @@ ul {
   padding-left: 10px
 }
 
-#name-traits {
-}
-
-#appearance-traits>h1 {
-}
-
-#appearance-traits {
-}
-
-#defining-traits {
-}
-
 .traits-list {
   display: flex;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -233,5 +221,9 @@ h1 {
   background-color: #F15025;
   border-radius: 4px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 425px) {
+  
 }
 </style>

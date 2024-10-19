@@ -166,4 +166,8 @@ div.icons {
 #generate-btn:hover {
   color: black;
 }
+
+@media only screen and (max-width: 425px) {
+  
+}
 </style>
