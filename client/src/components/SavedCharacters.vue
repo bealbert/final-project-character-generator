@@ -104,7 +104,7 @@ export default {
           resourceService.getCharacters().then((charactersResponse) => {
             this.$store.commit('SET_CHARACTERS', charactersResponse.data);
           })
-          deleteCharactersList = [];
+          this.deleteCharactersList = [];
         }));
       });
     }

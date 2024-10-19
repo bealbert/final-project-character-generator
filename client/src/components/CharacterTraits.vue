@@ -139,7 +139,7 @@ export default {
           });
         });
       }
-      newTrait = {};
+      this.newTrait = {};
       this.showForm = !this.showForm;
     }
   },

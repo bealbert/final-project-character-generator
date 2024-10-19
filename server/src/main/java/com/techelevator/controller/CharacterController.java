@@ -57,6 +57,7 @@ public class CharacterController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Character updateCharacter(@PathVariable int id, @Valid @RequestBody Character character) {
         try {
             character.setCharacterId(id);

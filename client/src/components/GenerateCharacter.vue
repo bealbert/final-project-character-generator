@@ -38,20 +38,20 @@ export default {
     generate() {
       resourceService.generateCharacter().then((response) => {
         this.character = response.data;
-        if (this.$store.state.user.id != 0) {
-          this.viewSave = !this.viewSave;
-        }
+        this.viewSave = !this.viewSave;
       });
     },
     saveCharacter(character) {
-      if (this.$store.state.user.id != 0) {
+      if (this.$store.state.user.id) {
         this.character.userId = this.$store.state.user.id;
         resourceService.editCharacter(character.characterId, character).then((response) => {
-          resourceService.getCharacters().then((charactersResponse) => {
-            this.$store.commit('SET_CHARACTERS', charactersResponse.data);
-          })
-          character = {};
-          this.viewSave = !this.viewSave;
+          if (response.status === 201) {
+            resourceService.getCharacters().then((charactersResponse) => {
+              this.$store.commit('SET_CHARACTERS', charactersResponse.data);
+            });
+            this.viewSave = !this.viewSave;
+            this.character = {};
+          }
         });
       }
     }
