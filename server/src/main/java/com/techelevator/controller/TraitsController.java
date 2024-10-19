@@ -199,7 +199,7 @@ public class TraitsController {
     @DeleteMapping(path = "/adventurer_roles/{id}")
     public void deleteAdventurerRole(@PathVariable int id) {
         try {
-            traitDao.deleteDefiningTrait(id);
+            traitDao.deleteAdventurerRole(id);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Oops! You must be an Admin to delete this trait.");
         }

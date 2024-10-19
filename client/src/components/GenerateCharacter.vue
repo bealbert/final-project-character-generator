@@ -14,7 +14,7 @@
     </ul>
   </section>
   <button @click="generate" id="generate-btn">Generate New Character</button>
-  <button v-show="viewSave" id="save-btn">Save Character</button>
+  <button v-show="viewSave" id="save-btn" @click="saveCharacter(character)">Save Character</button>
 </template>
 
 <script>
@@ -50,6 +50,7 @@ export default {
           resourceService.getCharacters().then((charactersResponse) => {
             this.$store.commit('SET_CHARACTERS', charactersResponse.data);
           })
+          character = {};
           this.viewSave = !this.viewSave;
         });
       }
