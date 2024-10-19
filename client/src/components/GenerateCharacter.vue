@@ -14,9 +14,8 @@
     </ul>
   </section>
   <button @click="generate" id="generate-btn">Generate New Character</button>
+  <button v-show="viewSave" id="save-btn">Save Character</button>
 </template>
-<!-- button needs to change to "save character" when char is generated -->
-<!-- icons need text boxes added on click, create submit form -->
 
 <script>
 import { resourceService } from '../services/ResourceService';
@@ -25,19 +24,35 @@ export default {
   data() {
     return {
       character: {
-        id: 0,
+        characterId: 0,
         name: '',
         appearance: '',
         definingTrait: '',
         adventurerRole: '',
+        userId: 0
       },
+      viewSave: false,
     }
   },
   methods: {
     generate() {
       resourceService.generateCharacter().then((response) => {
         this.character = response.data;
-      })
+        if (this.$store.state.user.id != 0) {
+          this.viewSave = !this.viewSave;
+        }
+      });
+    },
+    saveCharacter(character) {
+      if (this.$store.state.user.id != 0) {
+        this.character.userId = this.$store.state.user.id;
+        resourceService.editCharacter(character.characterId, character).then((response) => {
+          resourceService.getCharacters().then((charactersResponse) => {
+            this.$store.commit('SET_CHARACTERS', charactersResponse.data);
+          })
+          this.viewSave = !this.viewSave;
+        });
+      }
     }
   }
 }
@@ -127,6 +142,24 @@ div.icons {
   font-size: larger;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: white;
+}
+
+#save-btn {
+  align-self: center;
+  margin: 10px;
+  font-variant: small-caps;
+  background-color: #F15025;
+  border-radius: 4px;
+  font-weight: 900;
+  cursor: pointer;
+  display: block;
+  font-size: larger;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: white;
+}
+
+#save-btn:hover {
+  color: black;
 }
 
 #generate-btn:hover {

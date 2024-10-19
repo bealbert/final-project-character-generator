@@ -101,7 +101,9 @@ export default {
     deleteSelectedCharacters(deleteCharactersList) {
       deleteCharactersList.forEach(characterId => {
         resourceService.deleteCharacter(characterId).then((response => {
-          this.$store.commit('SET_CHARACTERS', response.data);
+          resourceService.getCharacters().then((charactersResponse) => {
+            this.$store.commit('SET_CHARACTERS', charactersResponse.data);
+          })
           deleteCharactersList = [];
         }));
       });

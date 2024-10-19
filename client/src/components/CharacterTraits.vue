@@ -2,7 +2,7 @@
   <section class="traits-list">
     <ul id="name-traits">
       <h1>Names</h1>
-      <li v-for="name in names" :key="name.traitId">
+      <li v-for="name in $store.state.names" :key="name.traitId">
         <input type="checkbox" v-bind:value="name.traitId" v-bind:id="name.traitId" v-model="selectedNames" />
         {{ name.traitId + ": " + name.traitDescription }}
       </li>
@@ -56,7 +56,6 @@ import { resourceService } from '../services/ResourceService';
 
 export default {
   //admin method needed to allow for delete testing
-  //figure out why your 
   data() {
     return {
       selectedNames: [],
@@ -75,32 +74,41 @@ export default {
       if(selectedNames.length > 0) {
         selectedNames.forEach(nameId => {
         resourceService.deleteName(nameId).then((nameResponse) => {
-          this.$store.commit('SET_NAMES', nameResponse.data);
-        })
+          // if(nameResponse.status == '')
+          resourceService.getNames().then((namesResponse) => {
+            this.$store.commit('SET_NAMES', namesResponse.data);
+          });
+        });
       });
       selectedNames = [];
       }
       if (selectedAppearances.length > 0) {
         selectedAppearances.forEach(appearanceId => {
         resourceService.deleteAppearance(appearanceId).then((appearanceResponse) => {
-          this.$store.commit('SET_APPEARANCES', appearanceResponse.data);
-        })
+          resourceService.getAppearances().then((appearancesResponse) => {
+            this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
+          });
+        });
       });
       selectedAppearances = [];
       }
       if(selectedDefiningTraits.length > 0) {
         selectedDefiningTraits.forEach(definingTraitId => {
         resourceService.deleteDefiningTrait(definingTraitId).then((definingTraitResponse) => {
-          this.$store.commit('SET_DEFINING_TRAITS', definingTraitResponse.data);
-        })
+          resourceService.getDefiningTraits().then((definingTraitsResponse) => {
+            this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
+          });
+        });
       });
       selectedDefiningTraits = [];
       }
       if(selectedAdventurerRoles.length > 0) {
         selectedAdventurerRoles.forEach(adventurerRoleId => {
         resourceService.deleteAdventurerRole(adventurerRoleId).then((adventurerRoleResponse) => {
-          this.$store.commit('SET_ADVENTURER_ROLES', adventurerRoleResponse.data);
-        })
+          resourceService.getAdventurerRoles((adventurerRolesResponse) => {
+            this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
+          });
+        });
       });
       selectedAdventurerRoles = [];
       }
@@ -108,19 +116,27 @@ export default {
     addNewTrait(newTrait) {
       if (newTrait.traitCategory == 'names') {
         resourceService.addName(newTrait).then((nameResponse) => {
-          this.$store.commit('SET_NAMES', nameResponse.data)
+          resourceService.getNames().then((namesResponse) => {
+            this.$store.commit('SET_NAMES', namesResponse.data);
+          });
         });
       } else if (newTrait.traitCategory == 'appearances') {
         resourceService.addAppearance(newTrait).then((appearanceResponse) => {
-          this.$store.commit('SET_APPEARANCES', appearanceResponse.data);
+          resourceService.getAppearances().then((appearancesResponse) => {
+            this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
+          });
         });
       } else if (newTrait.traitCategory == 'defining-traits') {
         resourceService.addDefiningTrait(newTrait).then((definingTraitResponse) => {
-          this.$store.commit('SET_DEFINING_TRAITS', definingTraitResponse.data);
+          resourceService.getDefiningTraits().then((definingTraitsResponse) => {
+            this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
+          });
         });
       } else if (newTrait.traitCategory == 'adventurer-roles') {
         resourceService.addAdventurerRole(newTrait).then((adventurerRoleResponse) => {
-          this.$store.commit('SET_ADVENTURER_ROLES', adventurerRoleResponse.data);
+          resourceService.getAdventurerRoles().then((adventurerRolesResponse) => {
+            this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
+          });
         });
       }
       newTrait = {};
