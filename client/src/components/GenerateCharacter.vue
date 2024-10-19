@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .character-info {
   display: flex;
   justify-content: flex-start;

@@ -89,11 +89,13 @@ export default {
         return adventurerRole.traitDescription == selectedCharacter.adventurerRole;
       }).traitId;
       resourceService.editCharacter(this.selectedCharacter.characterId, this.selectedCharacter).then((response) => {
-        resourceService.getCharacters().then((response) => {
-          this.$store.commit('SET_CHARACTERS', response.data);
-          selectedCharacter = {};
-          this.showForm = !this.showForm;
-        })
+        if (response.status === 201) {
+          resourceService.getCharacters().then((response) => {
+            this.$store.commit('SET_CHARACTERS', response.data);
+            this.selectedCharacter = {};
+            this.showForm = !this.showForm;
+          });
+        }
       }).catch((error) => {
         console.log(error);
       });
@@ -101,10 +103,12 @@ export default {
     deleteSelectedCharacters(deleteCharactersList) {
       deleteCharactersList.forEach(characterId => {
         resourceService.deleteCharacter(characterId).then((response => {
-          resourceService.getCharacters().then((charactersResponse) => {
-            this.$store.commit('SET_CHARACTERS', charactersResponse.data);
-          })
-          this.deleteCharactersList = [];
+          if (response.status === 204) {
+            resourceService.getCharacters().then((charactersResponse) => {
+              this.$store.commit('SET_CHARACTERS', charactersResponse.data);
+            })
+            this.deleteCharactersList = [];
+          }
         }));
       });
     }
@@ -129,7 +133,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 form#edit-character-form {
   display: flex;
   flex-direction: column;

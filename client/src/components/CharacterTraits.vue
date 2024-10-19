@@ -55,7 +55,6 @@
 import { resourceService } from '../services/ResourceService';
 
 export default {
-  //admin method needed to allow for delete testing
   data() {
     return {
       selectedNames: [],
@@ -71,72 +70,87 @@ export default {
   },
   methods: {
     deleteTraits(selectedNames, selectedAppearances, selectedDefiningTraits, selectedAdventurerRoles) {
-      if(selectedNames.length > 0) {
+      if (selectedNames.length > 0) {
         selectedNames.forEach(nameId => {
-        resourceService.deleteName(nameId).then((nameResponse) => {
-          // if(nameResponse.status == '')
-          resourceService.getNames().then((namesResponse) => {
-            this.$store.commit('SET_NAMES', namesResponse.data);
+          resourceService.deleteName(nameId).then((nameResponse) => {
+            if (nameResponse.status === 204) {
+              resourceService.getNames().then((namesResponse) => {
+                this.$store.commit('SET_NAMES', namesResponse.data);
+              });
+            }
           });
         });
-      });
-      selectedNames = [];
+        selectedNames = [];
       }
       if (selectedAppearances.length > 0) {
         selectedAppearances.forEach(appearanceId => {
-        resourceService.deleteAppearance(appearanceId).then((appearanceResponse) => {
-          resourceService.getAppearances().then((appearancesResponse) => {
-            this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
+          resourceService.deleteAppearance(appearanceId).then((appearanceResponse) => {
+            if (appearanceResponse.status === 204) {
+              resourceService.getAppearances().then((appearancesResponse) => {
+                this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
+              });
+            }
           });
         });
-      });
-      selectedAppearances = [];
+        selectedAppearances = [];
       }
-      if(selectedDefiningTraits.length > 0) {
+      if (selectedDefiningTraits.length > 0) {
         selectedDefiningTraits.forEach(definingTraitId => {
-        resourceService.deleteDefiningTrait(definingTraitId).then((definingTraitResponse) => {
-          resourceService.getDefiningTraits().then((definingTraitsResponse) => {
-            this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
+          resourceService.deleteDefiningTrait(definingTraitId).then((definingTraitResponse) => {
+            if (definingTraitResponse === 204) {
+              resourceService.getDefiningTraits().then((definingTraitsResponse) => {
+                this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
+              });
+            }
           });
         });
-      });
-      selectedDefiningTraits = [];
+        selectedDefiningTraits = [];
       }
-      if(selectedAdventurerRoles.length > 0) {
+      if (selectedAdventurerRoles.length > 0) {
         selectedAdventurerRoles.forEach(adventurerRoleId => {
-        resourceService.deleteAdventurerRole(adventurerRoleId).then((adventurerRoleResponse) => {
-          resourceService.getAdventurerRoles((adventurerRolesResponse) => {
-            this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
+          resourceService.deleteAdventurerRole(adventurerRoleId).then((adventurerRoleResponse) => {
+            if (adventurerRoleResponse.status === 204) {
+              resourceService.getAdventurerRoles((adventurerRolesResponse) => {
+                this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
+              });
+            }
           });
         });
-      });
-      selectedAdventurerRoles = [];
+        selectedAdventurerRoles = [];
       }
     },
     addNewTrait(newTrait) {
       if (newTrait.traitCategory == 'names') {
         resourceService.addName(newTrait).then((nameResponse) => {
-          resourceService.getNames().then((namesResponse) => {
-            this.$store.commit('SET_NAMES', namesResponse.data);
-          });
+          if (nameResponse.status === 201) {
+            resourceService.getNames().then((namesResponse) => {
+              this.$store.commit('SET_NAMES', namesResponse.data);
+            });
+          }
         });
       } else if (newTrait.traitCategory == 'appearances') {
         resourceService.addAppearance(newTrait).then((appearanceResponse) => {
-          resourceService.getAppearances().then((appearancesResponse) => {
-            this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
-          });
+          if (appearanceResponse.status === 201) {
+            resourceService.getAppearances().then((appearancesResponse) => {
+              this.$store.commit('SET_APPEARANCES', appearancesResponse.data);
+            });
+          }
         });
       } else if (newTrait.traitCategory == 'defining-traits') {
         resourceService.addDefiningTrait(newTrait).then((definingTraitResponse) => {
-          resourceService.getDefiningTraits().then((definingTraitsResponse) => {
-            this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
-          });
+          if (definingTraitResponse.status === 201) {
+            resourceService.getDefiningTraits().then((definingTraitsResponse) => {
+              this.$store.commit('SET_DEFINING_TRAITS', definingTraitsResponse.data);
+            });
+          }
         });
       } else if (newTrait.traitCategory == 'adventurer-roles') {
         resourceService.addAdventurerRole(newTrait).then((adventurerRoleResponse) => {
-          resourceService.getAdventurerRoles().then((adventurerRolesResponse) => {
-            this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
-          });
+          if (adventurerRoleResponse.status === 201) {
+            resourceService.getAdventurerRoles().then((adventurerRolesResponse) => {
+              this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
+            });
+          }
         });
       }
       this.newTrait = {};
@@ -160,7 +174,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style: none;
   background-color: #363537;
