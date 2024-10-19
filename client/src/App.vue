@@ -84,7 +84,7 @@ h1 {
 }
 
 img {
-  width: 15%;
+  width: 10%;
   position: fixed;
   top: 70px;
   right: 10px;

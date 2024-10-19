@@ -105,6 +105,7 @@ export default {
       if(selectedAdventurerRoles.length > 0) {
         selectedAdventurerRoles.forEach(adventurerRoleId => {
         resourceService.deleteAdventurerRole(adventurerRoleId).then((adventurerRoleResponse) => {
+          console.log(adventurerRoleResponse.status);
           resourceService.getAdventurerRoles((adventurerRolesResponse) => {
             this.$store.commit('SET_ADVENTURER_ROLES', adventurerRolesResponse.data);
           });

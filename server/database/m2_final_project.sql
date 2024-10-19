@@ -50,15 +50,15 @@ CREATE TABLE characters (
 -- Insert some sample starting data
 -- *************************************************************************************************
 
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (1, 'Warrior');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (2, 'Cleric');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (3, 'Wizard');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (4, 'Thief');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (5, 'Druid');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (6, 'Bard');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (7, 'Martial Artist');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (8, 'Necromancer');
-INSERT INTO adventurer_roles (adventurer_role_id, adventurer_role) VALUES (9, 'Witch');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Warrior');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Cleric');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Wizard');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Thief');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Druid');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Bard');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Martial Artist');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Necromancer');
+INSERT INTO adventurer_roles (adventurer_role) VALUES ('Witch');
 
 INSERT INTO appearances (appearance_description) VALUES ('red hair and a dour expression.');
 INSERT INTO appearances (appearance_description) VALUES ('an enormous scar bisects their face, and they avoid eye contact.');
